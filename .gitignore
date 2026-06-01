@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+
+# Virtual environment
+venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Docker volumes (opcional)
+postgres_data/
+
+# pytest
+.pytest_cache/
+
+# Migrations cache
+alembic/versions/__pycache__/

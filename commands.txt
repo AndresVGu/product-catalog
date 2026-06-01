@@ -1,0 +1,15 @@
+ uvicorn main:app --reload
+
++================+
+| Docker compose |
++================+
+   7   │ 
+   8   │ db → nombre del servicio (tu base de datos)
+   9   │ postgres:16 → imagen oficial de PostgreSQL
+  10   │ POSTGRES_USER → usuario de la DB
+  11   │ POSTGRES_PASSWORD → contraseña
+  12   │ POSTGRES_DB → base de datos inicial
+  13   │ 5432:5432 → puerto local
+  14   │ volumes → guarda datos aunque cierres Docker
+
+docker compose up -d
