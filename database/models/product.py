@@ -1,16 +1,37 @@
-from sqlalchemy import Column, Integer, String, DateTime, func, ForeignKey
-from sqlalchemy.orm import relationship
-from database.connection import Base
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+from database.models.base import Base, TimestampMixin
 
-class Product(Base):
+class Product(Base, TimestampMixin):
     __tablename__ = "products"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False, index=True)
-    brand = Column(String)
-    sku = Column(String, unique=True, index=True)
-    created_at = Column(DateTime, server_default=func.now())
+    id: Mapped[int] = mapped_column(primary_key=True)
 
-    #Category relatioship
-    category_id = Column(Integer, ForeignKey("categories.id"))
-    category = relationship("Category", back_populates="products")
+    name: Mapped[str] = mapped_column(
+        String(255),
+        index=True
+    )
+
+    brand: Mapped[str | None] = mapped_column(
+        String(100)
+    )
+
+    sku: Mapped[str | None] = mapped_column(
+        String(100),
+        unique=True,
+        index=True
+    )
+
+    category_id: Mapped[int | None] = mapped_column(
+        ForeignKey("categories.id")
+    )
+
+    category = relationship(
+        "Category",
+        back_populates="products"
+    )
+
+    product_store = relationship("ProductStore", back_populates="product")
+
+  
+

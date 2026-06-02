@@ -1,14 +1,28 @@
-from sqlalchemy import Column, Integer, String, DateTime, func
-from sqlalchemy.orm import relationship
-from database.connection import Base
+from sqlalchemy import String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from database.models.base import Base, TimestampMixin
 
-class Store(Base):
+
+class Store(Base, TimestampMixin):
     __tablename__ = "stores"
 
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False, unique=True, index=True)
-    country = Column(String)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(
+        String(100),
+        unique=True,
+        index = True
+    )
 
-    created_at = Column(DateTime, server_default=func.now())
+    country: Mapped[str] = mapped_column(
+        String(2)
+    )
 
-    prices = relationship("Price", back_populates="store")
+    website: Mapped[str | None] = mapped_column(
+
+        String(255)
+    )
+
+    product_store = relationship("ProductStore", back_populates="store")
+
+ 
+

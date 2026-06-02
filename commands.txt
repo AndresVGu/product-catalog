@@ -1,3 +1,4 @@
+ run the back ?
  uvicorn main:app --reload
 
 +================+
@@ -13,3 +14,16 @@
   14   │ volumes → guarda datos aunque cierres Docker
 
 docker compose up -d
+
++=============+
+| Creating tables |
++=============+
+To cretae tables first we need to set up our virtual environment  using
+1. python3 -m venv venv
+2.source venv/bin/activate
+3 python -m pip install --upgrade pip
+4. pip install -r requirements.txt
+5. in case that we don't have requirements.txt => pip install sqlalchemy psycopg2-binary python-dotenv
+
+in case you need drop tables 
+DROP TABLE _table_name_

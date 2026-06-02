@@ -1,19 +1,27 @@
-from sqlalchemy import Column, Integer, Float, DateTime, ForeignKey, func
-from sqlalchemy.orm import relationship
-from database.connection import Base
+from sqlalchemy import String, ForeignKey, Numeric
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+from database.models.base import Base, TimestampMixin
+from decimal import Decimal
 
-class Price(Base):
-    __tablename__ = "prices"
+class Price(Base, TimestampMixin):
+    __tablename__= "prices"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
 
-    product_id = Column(Integer, ForeignKey("products.id"))
-    store_id = Column(Integer, ForeignKey("stores.id"))
+    product_store_id: Mapped[int] = mapped_column(
+        ForeignKey("product_stores.id"),
+        index=True
+    )
 
-    price = Column(Float, nullable=False)
-    currency = Column(String, default="CAD")
+    amount: Mapped[Decimal] = mapped_column(
+        Numeric(10,2),
+        nullable=False
+    )
 
-    created_at = Column(DateTime, server_default=func.now())
+    currency: Mapped[str] = mapped_column(
+        String(3),
+        nullable=False,
+        default="CAD"
+    )
 
-    product = relationship("Product")
-    store = relationship("Store", back_populates="prices")
+    product_store = relationship("ProductStore", back_populates="prices")
