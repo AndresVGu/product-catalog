@@ -31,7 +31,6 @@ class Product(Base, TimestampMixin):
         back_populates="products"
     )
 
-    product_store = relationship("ProductStore", back_populates="product")
+    product_stores = relationship("ProductStore", back_populates="product")
 
   
-

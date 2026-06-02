@@ -7,7 +7,7 @@ store = db.query(Store).first()
 
 rule = TrackingRule(
     store_id=store.id,
-    search_query="laptop",
+    search_query="ram",
     category_hint="electronics",
     active=True
 )

@@ -22,7 +22,6 @@ class Store(Base, TimestampMixin):
         String(255)
     )
 
-    product_store = relationship("ProductStore", back_populates="store")
+    product_stores = relationship("ProductStore", back_populates="store")
 
  
-
